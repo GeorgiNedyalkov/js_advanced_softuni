@@ -20,10 +20,18 @@ function greatestCommonDivisor(num1, num2) {
   console.log(greatestCommonDivisor);
 }
 
-greatestCommonDivisor(15, 5);
-greatestCommonDivisor(2154, 458);
+// greatestCommonDivisor(15, 5);
+// greatestCommonDivisor(2154, 458);
 
-function sameNumbers() {}
+function sameNumbers(num) {
+  console.log(num[0]);
+  console.log(1 % 2);
+
+  while (num > 1) {}
+}
+
+sameNumbers(222);
+
 function previousDay() {}
 function timeToWalk() {}
 function roadRadar() {}
