@@ -245,3 +245,33 @@ function objectFactory(library, orders) {
 }
 
 const result = objectFactory(library, orders);
+
+function boost(hoverboard) {
+  hoverboard.boost = () => {
+    console.log(`Hoverboard has been boosted by 20%`);
+  };
+}
+
+const hoverboard = {
+  brand: "G.",
+};
+
+boost(hoverboard);
+
+hoverboard.boost();
+
+let data = `{ "manager": {"firstName":"John","lastName":"Doe"}  }`;
+
+let obj = JSON.parse(data);
+
+let newObj = {
+  name: "John",
+  age: 30,
+  city: "New York",
+};
+
+let objJson = JSON.stringify(newObj);
+
+let arr = ["John", "Peter", "Stefano"];
+
+let myArrJSON = JSON.stringify(arr);
