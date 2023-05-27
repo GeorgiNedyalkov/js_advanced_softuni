@@ -1,7 +1,5 @@
 # js_advanced_softuni
 
-# js_advanced_softuni
-
 ## Arrays
 
 - Arrays are list like objects
