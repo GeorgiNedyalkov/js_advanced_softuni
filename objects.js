@@ -23,16 +23,18 @@ function cityRecord(name, population, treasury) {
     treasury,
     taxRate: 10,
     collectTaxes() {
-      return Math.floor(this.treasury + this.population * this.taxRate);
+      return Math.floor((this.treasury += this.population * this.taxRate));
     },
     applyGrowth(percent) {
-      return Math.floor(this.population + this.population * (percent / 100));
+      return Math.floor((this.population += this.population * (percent / 100)));
     },
     applyRecession(percent) {
-      return Math.floor(this.population - this.population * (percent / 100));
+      return Math.floor((this.population -= this.population * (percent / 100)));
     },
   };
 }
+
+const sofia = cityRecord("Sofia", 10000, 24000);
 
 function variblesCityRecord(name, population, treasury) {
   const city = {};
@@ -52,34 +54,26 @@ const phonebook = {
 
 for (let name in phonebook) {
   const statement = `The phone number of ${name} is ${phonebook[name]}`;
-
-  // console.log(statement);
 }
-
-// Obtain all keys or values in an object using the Object object in JavaScript
 
 const names = Object.keys(phonebook);
 const phoneNumbers = Object.values(phonebook);
 const phonebookTupples = Object.entries(phonebook);
 
 function townPopulation(stringsArray) {
-  // create a towns object to store the result
   const towns = {};
-  // iterate over each string
   for (let string of stringsArray) {
     const townData = string.split(" <-> ");
 
     const name = townData[0];
     const population = townData[1];
 
-    // if town name is not in registry add it to registry
     if (towns[name] != undefined) {
       towns[name] += population;
     } else {
       towns[name] = population;
     }
   }
-  // print all the towns
   for (let town in towns) {
     console.log(`${towns[town]} : ${town}`);
   }
@@ -103,15 +97,11 @@ let person = {
 
 const john = person.greet(26);
 
-// Objects as function libraries
-
-// sorting helper
 const compareNumbers = {
   ascending: (a, b) => a - b,
   descending: (a, b) => b - a,
 };
 
-// Objects as a a switch replacement
 let count = 5;
 
 const parser = {
@@ -144,3 +134,114 @@ const anotherPerson = {
 };
 
 anotherPerson.fullName = getFullName;
+
+let model = "BMW";
+let topSpeed = 250;
+let color = "green";
+
+let car = {
+  model,
+  topSpeed,
+  color,
+};
+
+car.statistics = {
+  milesRun: 124000,
+  isDamaged: false,
+};
+
+function sing() {
+  return `${this.name} is a an excellent singer`;
+}
+
+function write() {
+  return `${this.name} is a an excellent writer`;
+}
+
+function act() {
+  return `${this.name} is a an excellent actor`;
+}
+
+const maria = {
+  name: "Maria",
+  act,
+  write,
+  sing,
+};
+
+const leonardo = {
+  name: "Leo",
+  write,
+};
+
+const rafael = {
+  name: "Rafa",
+  act,
+};
+
+function createRect(width, height) {
+  const rect = {
+    width,
+    height,
+  };
+
+  rect.getArea = () => {
+    return rect.width * rect.height;
+  };
+
+  return rect;
+}
+
+const library = {
+  print: function () {
+    console.log(`${this.name} is printing a page`);
+  },
+  scan: function () {
+    console.log(`${this.name} is scanning a document`);
+  },
+  play: function (artist, track) {
+    console.log(`${this.name} is playing '${track}' by ${artist}`);
+  },
+};
+
+const orders = [
+  {
+    template: { name: "ACME Printer" },
+    parts: ["print"],
+  },
+  {
+    template: { name: "Initech Scanner" },
+    parts: ["scan"],
+  },
+  {
+    template: { name: "ComTron Copier" },
+    parts: ["scan", "print"],
+  },
+  {
+    template: { name: "BoomBox Stereo" },
+    parts: ["play"],
+  },
+];
+
+function objectFactory(library, orders) {
+  const result = [];
+
+  for (let order of orders) {
+    const product = {
+      name: order.template.name,
+    };
+
+    for (let part of order.parts) {
+      const libraryKeys = Object.keys(library);
+
+      if (libraryKeys.includes(part)) {
+        product[part] = library[part];
+      }
+    }
+    result.push(product);
+  }
+
+  return result;
+}
+
+const result = objectFactory(library, orders);
