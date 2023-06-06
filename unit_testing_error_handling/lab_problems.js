@@ -28,8 +28,43 @@ function sumArrayElements(arr, startIndex, endIndex) {
   return sum;
 }
 
-console.log(sumArrayElements([10, 20, 30, 40, 50, 60], 3, 300));
-console.log(sumArrayElements([1.1, 2.2, 3.3, 4.4, 5.5], -3, 1));
-console.log(sumArrayElements([10, "twenty", 30, 40], 0, 2));
-console.log(sumArrayElements([], 1, 2));
-console.log(sumArrayElements("text", 0, 2));
+function subSum(arr, startIndex, endIndex) {
+  let sum = 0;
+
+  if (Array.isArray(arr) === false) {
+    throw new Error("Arr is not an array");
+  }
+
+  if (arr.find((number) => Number.isNaN(Number(number)))) {
+    throw new TypeError("Some elements in array were not numbers");
+  }
+
+  if (startIndex < 0) {
+    startIndex = 0;
+  }
+
+  if (endIndex > arr.length - 1) {
+    endIndex = arr.length - 1;
+  }
+
+  for (let i = startIndex; i <= endIndex; i++) {
+    // add current element to sum
+    sum += Number(arr[i]);
+  }
+
+  return sum;
+}
+
+try {
+  console.log(subSum([10, 20, 30, 40, 50, 60], 3, 300));
+  console.log(subSum([1.1, 2.2, 3.3, 4.4, 5.5], -3, 1));
+  console.log(subSum([10, "twenty", 30, 40], 0, 2));
+  console.log(subSum([30, 40], 0, 2));
+  console.log(subSum([], 1, 2));
+  console.log(subSum("text", 0, 2));
+} catch (error) {
+  console.log("An Exception happened");
+  if (error instanceof TypeError) {
+    console.log("You entered wrong input. All elements must be numbers.");
+  }
+}

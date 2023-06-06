@@ -1,5 +1,5 @@
 function inner() {
-  throw new Error("a");
+  throw new RangeError("Here is my error");
 }
 
 function outer() {
@@ -10,5 +10,7 @@ function outer() {
 try {
   outer();
 } catch (e) {
-  console.log("here");
+  console.log(e.name);
+  console.log(e.message);
+  console.log(e.stack);
 }
