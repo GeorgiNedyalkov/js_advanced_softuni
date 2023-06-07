@@ -76,3 +76,15 @@ Definition, Import and Export
 ### Modules
 
 - A _set of functions_ to be included in applications
+
+### Ideology of good tests
+
+1. Bad cases - function doesn't have needed correct parameters to work
+2. Good cases - the function works
+   2.5 Check with working values - more than 1 test to cover for defaults
+   2.6 Check edge cases for correct values
+   2.7 If there are a small consisted amount of correct return values.
+3. Code coverage - have I tested every condition on every line - line coverage
+4. Super Edge cases - value overflows, similar code errors (used isNaN instead of Number)
+
+First we throw exceptions because if they are not correct everything fails.
