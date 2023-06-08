@@ -28,3 +28,21 @@ the object through which it is accessed becomes the value of `this`.
 ### Instance of operator
 
 `instanceof`
+
+### Static Method
+
+The _static_ keyword defines a static method for a class.
+Static methods are part of the class and not its instances.
+You can _only_ access other static methods via _this_ context.
+
+### Accessor Properties
+
+- Methods that mimic values.
+- Keywords _get_ and _set_ with _matching identifier_.
+- They can be accessed and assigned to like properties.
+- Accessors are often used for validation.
+- The _setter_ can verify that a given value meets requirements.
+- Properties _without_ a setter are _read-only_ (cannot be assigned).
+- Getters can be used for a _validated_ or _calculated_ property.
+
+## DOM Classes Methods and Attributes

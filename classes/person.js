@@ -8,6 +8,10 @@ class Person {
     this.email = email;
   }
 
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
   get age() {
     return this._age;
   }
@@ -25,7 +29,11 @@ class Person {
   }
 }
 
-const person = new Person("Georgi", "Nedyalkov", 28, "gnedyalkov94@gmail.com");
+function getPersons() {
+  let anna = new Person("Anna", "Simpson", 22, "anna@yahoo.com");
+  let softuni = new Person("SoftUni");
+  let stephan = new Person("Stephan", "Johnson", 25);
+  let gabriel = new Person("Gabriel", "Peterson", 24, "g.p@gmail.com");
 
-person.age = {};
-console.log(person);
+  return [anna, softuni, stephan, gabriel];
+}
