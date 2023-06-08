@@ -8,12 +8,16 @@ class Person {
     this.email = email;
   }
 
-  setAge(value) {
-    if (!Number.isNumber(value) || value < 0 || value > 150) {
+  get age() {
+    return this._age;
+  }
+
+  set age(value) {
+    if (!Number.isInteger(value) || value < 0 || value > 150) {
       throw new RangeError("Age must be an integer between 0 and 150");
     }
 
-    this.age = value;
+    this._age = value;
   }
 
   toString() {
@@ -24,3 +28,4 @@ class Person {
 const person = new Person("Georgi", "Nedyalkov", 28, "gnedyalkov94@gmail.com");
 
 person.age = {};
+console.log(person);
