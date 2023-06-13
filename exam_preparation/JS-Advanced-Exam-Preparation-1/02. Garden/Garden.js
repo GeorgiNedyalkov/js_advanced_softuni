@@ -1,8 +1,8 @@
 class Garden {
-  constructor(spaceAvailable, plants = [], storage = []) {
+  constructor(spaceAvailable) {
     this.spaceAvailable = spaceAvailable;
-    this.plants = plants;
-    this.storage = storage;
+    this.plants = [];
+    this.storage = [];
   }
 
   addPlant(plantName, spaceRequired) {
@@ -10,23 +10,21 @@ class Garden {
       throw new Error("Not enough space in the garden.");
     }
 
-    this.spaceAvailable -= spaceRequired;
-
-    let plant = {
+    this.plants.push({
       plantName,
       spaceRequired,
       ripe: false,
       quantity: 0,
-    };
+    });
 
-    this.plants.push(plant);
-
-    return `The ${plant.plantName} has been successfully planted in the garden.`;
+    this.spaceAvailable -= spaceRequired;
+    return `The ${plantName} has been successfully planted in the garden`;
   }
 
   ripenPlant(plantName, quantity) {
     let plant = this.plants.find((p) => p.plantName === plantName);
 
+    // plant === undefined
     if (!plant) {
       throw new Error(`There is no ${plantName} in the garden.`);
     }
@@ -36,16 +34,16 @@ class Garden {
     }
 
     if (quantity <= 0) {
-      throw new Error(`The quantity cannot be zero or negative.`);
+      throw new Error("The quantity cannot be zero or negative.");
     }
 
-    plant.quantity += quantity;
     plant.ripe = true;
+    plant.quantity += quantity;
 
     if (quantity === 1) {
-      return `${quantity} ${plant.plantName} has successfully ripened.`;
-    } else if (quantity > 1) {
-      return `${quantity} ${plant.plantName}s have successfully ripened.`;
+      return `${quantity} ${plantName} has successfully ripened.`;
+    } else {
+      return `${quantity} ${plantName}s have successfully ripened.`;
     }
   }
 
@@ -62,48 +60,32 @@ class Garden {
       );
     }
 
-    this.plants = this.plants.filter((p) => p.plantName !== plant.plantName);
-
-    this.storage.push({
-      plantName: plant.plantName,
-      quantity: plant.quantity,
-    });
-
+    this.plants = this.plants.filter((p) => p.plantName !== plantName);
+    this.storage.push({ plantName, quantity: plant.quantity });
     this.spaceAvailable += plant.spaceRequired;
 
     return `The ${plantName} has been successfully harvested.`;
   }
 
   generateReport() {
-    let report = `The garden has ${this.spaceAvailable} free space left. \n`;
+    let result = [`The garden has ${this.spaceAvailable} free space left.`];
 
-    this.plants = this.plants.sort((a, b) => a.plantName > b.plantName);
+    this.plants.sort((a, b) => a.plantName.localeCompare(b.plantName));
+    let plantsArrString = this.plants.map((p) => p.plantName).join(", ");
+    let plantsString = `"Plants in the garden: ${plantsArrString}`;
+    result.push(plantsString);
 
-    let plantsArr = [];
-    let plantsStr = "";
+    let storageArrString = this.storage
+      .map((p) => `${p.plantName} (${p.quantity})`)
+      .join(", ");
 
-    this.plants.map((p) => plantsArr.push(p.plantName));
+    let storageString =
+      this.storage.length === 0
+        ? "Plants in storage: This storage is empty"
+        : `Plants in storage: ${storageArrString}`;
 
-    plantsStr = plantsArr.join(", ");
-
-    report += `Plants in the garden: ${plantsStr}\n`;
-
-    if (this.storage.length === 0) {
-      report += "Plants in storage: The storage is empty";
-    } else {
-      let storagePlants = [];
-      let storageString = "";
-
-      this.storage.map((p) =>
-        storagePlants.push(`${p.plantName} (${p.quantity})`)
-      );
-
-      storageString = storagePlants.join(" ");
-
-      report += `Plants in storage: ${storageString}`;
-    }
-
-    return report;
+    result.push(storageString);
+    return result.join("\n");
   }
 }
 
