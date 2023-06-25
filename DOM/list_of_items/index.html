@@ -12,10 +12,39 @@
     <ul id="items-list">
         <li>First</li>
         <li>Second</li>
+        <li class="red">Red</li>
+        <li class="red">Red</li>
     </ul>
     <input type="text" id="new-element">
     <button id="add-btn" onclick="addItem()">Add</button>
+    <button id="delete-btn" onclick="deleteRedElements()">Delete</button>
     </div>
+
+    <table border="1" id="customers">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>eve@gmail.com</td>
+        </tr>
+        <tr>
+            <td>Nick</td>
+            <td>nick@yahoo.com</td>
+        </tr>
+        <tr>
+            <td>Didi</td>
+            <td>didi@didi.com</td>
+        </tr>
+        <tr>
+            <td>Tedy</td>
+            <td>tedy@tedy.com</td>
+        </tr>
+    </table>
+    Email: <input type="text" name="email">
+    <button onclick="deleteByEmail()">Delete</button>
+    <div id="result" />
     
     <script src="./index.js"></script>
 </body>
